@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./Header";
+import Search from "./Search";
+import Fetch from "./Fetch";
 import {
   Container,
+  FormControl,
+  Grid,
   IconButton,
+  Input,
+  InputLabel,
+  InputAdornment,
   InputBase,
   Paper,
   Typography,
@@ -53,7 +60,6 @@ const useStyles = makeStyles((theme) => ({
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
     width: "100%",
@@ -68,29 +74,38 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const classes = useStyles();
+  const [searchString, setSearchString] = useState("");
+  const [toggle, setToggle] = useState(false);
 
   return (
     <div>
       <Header />
       <Paper className={classes.paperContainer}>
-        <Container maxWidth="sm" className={classes.searchPlace}>
+        {toggle ? (
+          <Fetch searchString={searchString} />
+        ) : (
+          <Search setSearchString={setSearchString} setToggle={setToggle} />
+        )}
+        {/* <Container maxWidth="sm" className={classes.searchPlace}>
           <Typography variant="h5">
             Enter your postcode to view cafes, bars and restaurants nearby
           </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ "aria-label": "search" }}
-            />
-          </div>
-        </Container>
+          <FormControl className={classes.margin}>
+            <Grid alignItems="flex-end">
+              <Input
+                id="input-with-icon-adornment"
+                placeholder="Search..."
+                onChange={(e) => {
+                  setSearchString(e.target.value);
+                  console.log(searchString);
+                }}
+              />
+              <IconButton aria-label="Search">
+                <SearchIcon />
+              </IconButton>
+            </Grid>
+          </FormControl>
+        </Container> */}
       </Paper>
     </div>
   );

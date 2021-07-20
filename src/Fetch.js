@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import XMLParser from "react-xml-parser";
 
-function Fetch() {
+function Fetch(params) {
   const [grubList, setGrubList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -51,6 +51,7 @@ function Fetch() {
       {grubList.map((grub) => (
         <div key={grub[2].value}>{grub[2].value}</div>
       ))}
+      {console.log(params, "params")}
     </div>
   );
 }
