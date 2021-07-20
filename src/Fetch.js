@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import XMLParser from "react-xml-parser";
 
-function App() {
+function Fetch() {
   const [grubList, setGrubList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -55,4 +55,4 @@ function App() {
   );
 }
 
-export default App;
+export default Fetch;
