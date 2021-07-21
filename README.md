@@ -8,6 +8,8 @@
 
 ## To see the MVP on Heroku, navigate here: https://safe-garden-52184.herokuapp.com/
 
+Please enter a valid postcode, as the postcode validation has not been set up yet.
+
 ### Techologies
 
 The app was built using **"create-react-app"**. At the moment the app is only web-based. I used **React Hooks** for this project and **Material UI** for styling.
@@ -18,6 +20,7 @@ The app uses two open source **APIs** (no keys required). First, **https://postc
 
 - clone the repo and run `yarn` to donwload dependencies.
 - run `yarn start` to launch and navigate to localhost:8080 to view in your browser.
+- if you get a CORS Anywhere error - you may need to open https://cors-anywhere.herokuapp.com/https://ratings.food.gov.uk/ in your browser and request temprary access to the demo server
 
 ### How it works
 
