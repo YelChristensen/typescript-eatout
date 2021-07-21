@@ -3,6 +3,7 @@ import Axios from "axios";
 import Geolocation from "./Geolocation";
 import VenueCard from "./VenueCard";
 import XMLParser from "react-xml-parser";
+import "whatwg-fetch";
 import { Container, Grid, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({

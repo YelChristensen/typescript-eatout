@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
+import "whatwg-fetch";
 
 export default function Geolocation(params) {
   const [isLoading, setIsLoading] = useState(false);
-  console.log(params, "from Geolocation");
 
   useEffect(() => {
     setIsLoading(true);
