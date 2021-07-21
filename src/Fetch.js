@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import Geolocation from "./Geolocation";
+import VenueCard from "./VenueCard";
 import XMLParser from "react-xml-parser";
-import { Container, makeStyles } from "@material-ui/core";
+import { Container, Grid, makeStyles } from "@material-ui/core";
+import { Sort } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   searchResults: {
@@ -25,7 +27,7 @@ function Fetch(params) {
     setIsLoading(true);
     console.log(lat, long, "latlong");
     Axios.get(
-      `https://cors-anywhere.herokuapp.com/https://ratings.food.gov.uk/enhanced-search/en-GB/^/^/DISTANCE/0/^/${long}/${lat}/1/30/xml`,
+      `https://cors-anywhere.herokuapp.com/https://ratings.food.gov.uk/enhanced-search/en-GB/^/^/DISTANCE/1/^/${long}/${lat}/1/30/xml`,
       {
         headers: new Headers({
           Accept: "text/html/xml",
@@ -50,7 +52,6 @@ function Fetch(params) {
             g.push(grubs[i].children);
           }
         }
-        console.log(g[0][2].value);
         setGrubList(g);
         setIsLoading(false);
       })
@@ -67,10 +68,11 @@ function Fetch(params) {
     </Container>
   ) : (
     <Container maxWidth="sm" className={classes.searchResults}>
-      {grubList.map((grub) => (
-        <div key={grub[2].value}>{grub[2].value}</div>
-      ))}
-      {console.log(params, "params")}
+      <Grid direction="row">
+        {grubList.map((grub) => (
+          <VenueCard key={grub[2].value} grub={grub} />
+        ))}
+      </Grid>
     </Container>
   );
 }
