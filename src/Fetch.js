@@ -4,7 +4,6 @@ import Geolocation from "./Geolocation";
 import VenueCard from "./VenueCard";
 import XMLParser from "react-xml-parser";
 import { Container, Grid, makeStyles } from "@material-ui/core";
-import { Sort } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   searchResults: {
@@ -25,7 +24,7 @@ function Fetch(params) {
 
   useEffect(() => {
     setIsLoading(true);
-    console.log(lat, long, "latlong");
+
     Axios.get(
       `https://cors-anywhere.herokuapp.com/https://ratings.food.gov.uk/enhanced-search/en-GB/^/^/DISTANCE/1/^/${long}/${lat}/1/30/xml`,
       {
@@ -57,7 +56,6 @@ function Fetch(params) {
       })
       .catch((e) => {
         setIsLoading(false);
-        console.log(e);
       });
   }, [lat, long]);
 

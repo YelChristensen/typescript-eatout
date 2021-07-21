@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Header from "./Header";
 import Search from "./Search";
 import Fetch from "./Fetch";
-// import { Paper } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { withStyles } from "@material-ui/core/styles";
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Container,
   FormControl,
@@ -39,21 +39,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
   },
-  inputRoot: {
-    color: "inherit",
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "20ch",
-      },
-    },
-  },
 }));
 
 const Search = (params) => {
@@ -62,7 +47,7 @@ const Search = (params) => {
   return (
     <Container maxWidth="sm" className={classes.searchPlace}>
       <Typography variant="h5">
-        Enter your postcode to view cafes, bars and restaurants nearby
+        Enter your postcode to view cafes, canteens and restaurants nearby
       </Typography>
       <FormControl className={classes.margin}>
         <Grid alignItems="flex-end">

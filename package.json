@@ -16,6 +16,10 @@
     "react-xml-parser": "^1.1.8",
     "web-vitals": "^1.0.1"
   },
+  "engines": {
+    "node": "12.13.1",
+    "npm": "7.10.0"
+    }
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

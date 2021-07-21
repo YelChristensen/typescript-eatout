@@ -25,13 +25,11 @@ export default function Geolocation(params) {
         let long2 = d.data.result.longitude.toString();
         params.setLat(lat2);
         params.setLong(long2);
-        console.log(lat2 + long2, "geolocation");
 
         setIsLoading(false);
       })
       .catch((e) => {
         setIsLoading(false);
-        console.log(e);
       });
   }, []);
   return <div></div>;
