@@ -7,6 +7,7 @@ export default function Geolocation(params) {
 
   useEffect(() => {
     setIsLoading(true);
+
     Axios.get(
       `https://cors-anywhere.herokuapp.com/https://api.postcodes.io/postcodes/${params.params.searchString}`,
       {
@@ -14,7 +15,7 @@ export default function Geolocation(params) {
           Accept: "text/html/xml",
           "content-type": "application/x-www-form-urlencoded",
           "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET, POST, PUT",
+          "Access-Control-Allow-Methods": "GET",
           "Access-Control-Allow-Headers": "Content-Type",
         }),
         mode: "no-cors",
@@ -31,6 +32,7 @@ export default function Geolocation(params) {
       .catch((e) => {
         setIsLoading(false);
       });
-  }, []);
-  return <div></div>;
+    return;
+  }, [params]);
+  return isLoading ? <div></div> : <div></div>;
 }

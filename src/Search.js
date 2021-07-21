@@ -39,10 +39,10 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
   },
-  button: {
-    background: "none",
-    border: "none",
-  },
+  // button: {
+  //   background: "none",
+  //   border: "none",
+  // },
 }));
 
 const Search = (params) => {
@@ -54,7 +54,7 @@ const Search = (params) => {
         Enter your postcode to view cafes, canteens and restaurants nearby
       </Typography>
       <FormControl className={classes.margin}>
-        <Grid alignItems="flex-end">
+        <Grid container direction="row">
           <Input
             id="input-with-icon-adornment"
             placeholder="Search..."
@@ -62,13 +62,13 @@ const Search = (params) => {
               params.setSearchString(e.target.value);
             }}
           />
-          <IconButton aria-label="Search">
-            <button
-              onClick={() => params.setToggle(true)}
-              className={classes.button}
-            >
-              <SearchIcon />
-            </button>
+          <IconButton
+            aria-label="Search"
+            onClick={() => params.setToggle(true)}
+          >
+            {/* <button className={classes.button}> */}
+            <SearchIcon />
+            {/* </button> */}
           </IconButton>
         </Grid>
       </FormControl>

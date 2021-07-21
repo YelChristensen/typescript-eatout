@@ -33,7 +33,7 @@ function Fetch(params) {
           Accept: "text/html/xml",
           "content-type": "application/x-www-form-urlencoded",
           "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET, POST, PUT",
+          "Access-Control-Allow-Methods": "GET",
           "Access-Control-Allow-Headers": "Content-Type",
         }),
         mode: "no-cors",
@@ -67,7 +67,7 @@ function Fetch(params) {
     </Container>
   ) : (
     <Container maxWidth="sm" className={classes.searchResults}>
-      <Grid direction="row">
+      <Grid container direction="column">
         {grubList.map((grub) => (
           <VenueCard key={grub[2].value} grub={grub} />
         ))}
