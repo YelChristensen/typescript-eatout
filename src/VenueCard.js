@@ -24,28 +24,28 @@ export default function VenueCard(venue) {
           color="textSecondary"
           gutterBottom
         >
-          Food Hygiene Rating: {venue.grub[10].value}
+          Food Hygiene Rating: {venue.venue.RatingValue}
         </Typography>
         <Typography variant="h5" component="h2">
-          {venue.grub[2].value}
+          {venue.venue.BusinessName}
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
-          Distance: {venue.grub[10].value}
+          Distance: {venue.venue.Distance}
         </Typography>
         <Typography variant="body2" component="p">
-          {venue.grub[5].value}
+          {venue.venue.AddressLine1}
         </Typography>
         <Typography variant="body2" component="p">
-          {venue.grub[6].value}
+          {venue.venue.AddressLine2}
         </Typography>
         <Typography variant="body2" component="p">
-          {venue.grub[7].value}
+          {venue.venue.AddressLine3}
         </Typography>
         <Typography variant="body2" component="p">
-          {venue.grub[8].value}
+          {venue.venue.AddressLine4}
         </Typography>
         <Typography variant="body2" component="p">
-          {venue.grub[9].value}
+          {venue.venue.PostCode}
         </Typography>
       </CardContent>
     </Card>

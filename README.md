@@ -28,7 +28,8 @@ The user is presented with a search field, where they can enter their postcode. 
 
 ### Todos:
 
-- Postcode validation on the search field
-- Google Maps API to plot venus on the map
-- Autocomplete address on the search field (also using Google Maps API)
-- Write tests
+- add postcode validation on the search field
+- add bars, pubs and takaways to the venue list
+- add Google Maps API to plot venus on the map
+- add autocomplete address on the search field (also using Google Maps API)
+- write tests
