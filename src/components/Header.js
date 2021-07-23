@@ -1,6 +1,6 @@
 import React from "react";
 import { AppBar, IconButton, Toolbar } from "@material-ui/core";
-import logo from "./LogoWhiteAndBlue.png";
+import logo from "../assets/LogoWhiteAndBlue.png";
 
 function Header(params) {
   return (

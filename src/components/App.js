@@ -5,7 +5,7 @@ import Fetch from "./Fetch";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { withStyles } from "@material-ui/core/styles";
 
-import hero from "./hero.jpg";
+import hero from "../assets/hero.jpg";
 
 const useStyles = (theme) => ({
   "@global": {
