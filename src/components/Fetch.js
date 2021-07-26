@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-// import Axios from "axios";
-// import Geolocation from "./Geolocation";
+import Axios from "axios";
+
 import VenueCard from "./VenueCard";
-// import XMLParser from "react-xml-parser";
+
 import "whatwg-fetch";
 import { Container, Grid, makeStyles } from "@material-ui/core";
 
@@ -25,75 +25,27 @@ function Fetch(params) {
 
   useEffect(() => {
     setIsLoading(true);
-    const url1 = "https://api.postcodes.io/postcodes";
-    const url2 =
-      "https://cors-anywhere.herokuapp.com/https://ratings.food.gov.uk/enhanced-search/en-GB/^/^/DISTANCE/1/^";
-    fetch(`${url1}/${params.searchString}`)
-      .then((response) => response.json()) // pass the data as promise to next then block
-      .then((data) => {
-        const lat = data.result.latitude;
-        const long = data.result.longitude;
+    const postcodeURL = "https://api.postcodes.io/postcodes";
+    Axios.get(`${postcodeURL}/${params.searchString}`)
+      .then((response) => {
+        const lat = response.data.result.latitude;
+        const long = response.data.result.longitude;
         setLat(lat);
         setLong(long);
-
-        return fetch(`${url2}/${long}/${lat}/1/30/json`, {
-          method: "get",
-          // headers: new Headers({
-          //   Accept: "text/plain",
-          //   "content-type": "application/json",
-          //   "Access-Control-Allow-Origin": "*",
-          //   "Access-Control-Allow-Methods": "GET",
-          //   "Access-Control-Allow-Headers": "Content-Type",
-          // }),
-          // mode: "no-cors",
-        });
-        // make a 2nd request and return a promise
+        return Axios.get(`http://localhost:8080/${long}/${lat}/1/30/json`);
       })
-      .then((response) => response.json())
-      .then((data) => {
+      .then((response) => {
         let venues =
-          data.FHRSEstablishment.EstablishmentCollection.EstablishmentDetail;
+          response.data.FHRSEstablishment.EstablishmentCollection
+            .EstablishmentDetail;
         setIsLoading(false);
         return setVenueList(venues);
       })
-      .catch((err) => {
-        console.error("Request failed", err);
+      .catch((error) => {
+        console.log(error);
         setIsLoading(false);
       });
-
-    // Axios.get(
-    //   `https://cors-anywhere.herokuapp.com/https://ratings.food.gov.uk/enhanced-search/en-GB/^/^/DISTANCE/1/^/${long}/${lat}/1/30/xml`,
-    //   {
-    //     headers: new Headers({
-    //       Accept: "text/html/xml",
-    //       "content-type": "application/x-www-form-urlencoded",
-    //       "Access-Control-Allow-Origin": "*",
-    //       "Access-Control-Allow-Methods": "GET",
-    //       "Access-Control-Allow-Headers": "Content-Type",
-    //     }),
-    //     mode: "no-cors",
-    //   }
-    // )
-    //   .then((d) => {
-    //     let g = [];
-    //     const xml = new XMLParser().parseFromString(d.data);
-    //     let grubs = xml.children[1].children;
-    //     for (let i in grubs) {
-    //       if (
-    //         grubs[i].children !== null &&
-    //         grubs[i].children !== [] &&
-    //         grubs[i].children.length > 0
-    //       ) {
-    //         g.push(grubs[i].children);
-    //       }
-    //     }
-    //     setGrubList(g);
-    //     setIsLoading(false);
-    //   })
-    //   .catch((e) => {
-    //     setIsLoading(false);
-    //   });
-  }, [params.searchString]);
+  }, []);
 
   return isLoading ? (
     <Container maxWidth="sm" className={classes.searchLoading}>
