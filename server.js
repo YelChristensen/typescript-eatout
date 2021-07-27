@@ -8,22 +8,17 @@ app.set("port", process.env.PORT || 8080);
 app.use(cors({ origin: "*" }));
 
 app.get(":endpoint([\\/\\w\\.-]*)", function (req, res) {
-  if (req.params) {
-    let endpoint =
-      "https://ratings.food.gov.uk/enhanced-search/en-GB/^/^/DISTANCE/1/^" +
-      req.params.endpoint;
-    console.log("I was here first");
-    axios
-      .get(endpoint)
-      .then((response) => {
-        res.json(response.data);
-      })
-      .catch((error) => {
-        res.json(error);
-      });
-  } else {
-    console.log("waiting for req.params");
-  }
+  let endpoint =
+    "https://ratings.food.gov.uk/enhanced-search/en-GB/^/^/DISTANCE/1/^" +
+    req.params.endpoint;
+  axios
+    .get(endpoint)
+    .then((response) => {
+      res.json(response.data);
+    })
+    .catch((error) => {
+      res.json(error);
+    });
 });
 
 app.listen(app.get("port"), () => {
