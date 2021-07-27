@@ -11,7 +11,7 @@ app.get(":endpoint([\\/\\w\\.-]*)", function (req, res) {
   let endpoint =
     "https://ratings.food.gov.uk/enhanced-search/en-GB/^/^/DISTANCE/1/^" +
     req.params.endpoint;
-
+  console.log("I was here first");
   axios
     .get(endpoint)
     .then((response) => {
