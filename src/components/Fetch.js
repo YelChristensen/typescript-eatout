@@ -32,7 +32,9 @@ function Fetch(params) {
         const long = response.data.result.longitude;
         setLat(lat);
         setLong(long);
-        return Axios.get(`/${long}/${lat}/1/30/json`);
+        return Axios.get(
+          `${window.location.hostname}:8080/${long}/${lat}/1/30/json`
+        );
       })
       .then((response) => {
         let venues =
