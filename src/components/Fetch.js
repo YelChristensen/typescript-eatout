@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 
 import VenueCard from "./VenueCard";
-
-import "whatwg-fetch";
 import { Container, Grid, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -20,8 +18,6 @@ function Fetch(params) {
   const classes = useStyles();
   const [venueList, setVenueList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [lat, setLat] = useState([]);
-  const [long, setLong] = useState([]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -30,8 +26,6 @@ function Fetch(params) {
       .then((response) => {
         const lat = response.data.result.latitude;
         const long = response.data.result.longitude;
-        setLat(lat);
-        setLong(long);
         return Axios.get(
           `https://safe-garden-52184.herokuapp.com/${long}/${lat}/1/30/json`
         );
@@ -51,8 +45,7 @@ function Fetch(params) {
 
   return isLoading ? (
     <Container maxWidth="sm" className={classes.searchLoading}>
-      Loading..
-      {/* <Geolocation params={params} setLat={setLat} setLong={setLong} /> */}
+      Loading...
     </Container>
   ) : (
     <Container maxWidth="sm" className={classes.searchResults}>

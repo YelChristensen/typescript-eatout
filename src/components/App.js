@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import Axios from "axios";
 import Header from "./Header";
 import Search from "./Search";
 import Fetch from "./Fetch";

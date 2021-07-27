@@ -16,11 +16,12 @@ The app was built using **"create-react-app"**. At the moment the app is only we
 
 The app uses two open source **APIs** (no keys required). First, **https://postcodes.io/** converts the user entered postcode into lat-long, then a list of venues and their food hygiene ratings is obtained from **https://api.ratings.food.gov.uk/**. As these APIs are open source, there is a limited number of calls that can be made in a certain period, so if you get an error 403, try again the next day.
 
+This was going to be a front-end only app, but I had to set up a proxy server in order to deal with CORS.
+
 ### Installation and set-up
 
 - clone the repo and run `yarn` to donwload dependencies.
 - run `yarn start` to launch and navigate to localhost:8080 to view in your browser.
-- if you get a CORS Anywhere error - you may need to open https://cors-anywhere.herokuapp.com/https://ratings.food.gov.uk/ in your browser and request temprary access to the demo server
 
 ### How it works
 

@@ -39,10 +39,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
   },
-  // button: {
-  //   background: "none",
-  //   border: "none",
-  // },
 }));
 
 const Search = (params) => {
@@ -66,9 +62,7 @@ const Search = (params) => {
             aria-label="Search"
             onClick={() => params.setToggle(true)}
           >
-            {/* <button className={classes.button}> */}
             <SearchIcon />
-            {/* </button> */}
           </IconButton>
         </Grid>
       </FormControl>
