@@ -33,7 +33,7 @@ function Fetch(params) {
         setLat(lat);
         setLong(long);
         return Axios.get(
-          `${window.location.hostname}:8080/${long}/${lat}/1/30/json`
+          `https://safe-garden-52184.herokuapp.com/${long}/${lat}/1/30/json`
         );
       })
       .then((response) => {
