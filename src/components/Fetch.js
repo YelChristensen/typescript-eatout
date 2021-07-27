@@ -47,7 +47,7 @@ function Fetch(params) {
         console.log(error);
         setIsLoading(false);
       });
-  }, []);
+  }, [params.searchString]);
 
   return isLoading ? (
     <Container maxWidth="sm" className={classes.searchLoading}>
