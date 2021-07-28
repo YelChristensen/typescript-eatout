@@ -20,8 +20,37 @@ This was going to be a front-end only app, but I had to set up a proxy server in
 
 ### Installation and set-up
 
-- clone the repo and run `yarn` to donwload dependencies.
-- run `yarn start` to launch and navigate to localhost:8080 to view in your browser.
+Because this app is made of two npm projects, afte the repo is cloned, there are two places to run `npm` commands:
+
+1. Node API server at the root
+2. React UI
+
+#### Run the API server
+
+In a terminal:
+
+<pre><code>
+#Initial setup
+npm install
+
+#Start the server
+npm start
+</code></pre>
+
+#### Run the React UI
+
+In a separate terminal from the API server, start the UI:
+
+<pre><code>
+#Always change directory, first
+cd react-ui/
+
+#Initial setup
+npm install
+
+#Start the server
+npm start
+</code></pre>
 
 ### How it works
 
