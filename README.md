@@ -1,6 +1,6 @@
 # EatOut
 
-![App Screenshot](/src/screenshot.png)
+![App Screenshot](/react-ui/src/screenshot.png)
 
 ## An app for finding safe places to eat nearby
 
