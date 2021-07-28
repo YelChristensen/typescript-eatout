@@ -27,5 +27,8 @@
     "create-react-app",
     "react"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "web-vitals": "^2.1.0"
+  }
 }
