@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import {
+  Button,
   Container,
   FormControl,
   Grid,
   IconButton,
-  Input,
+  InputAdornment,
+  TextField,
   Typography,
 } from "@material-ui/core";
 import { alpha, makeStyles } from "@material-ui/core/styles";
-import SearchIcon from "@material-ui/icons/Search";
+import MyLocationIcon from "@material-ui/icons/MyLocation";
 
 const useStyles = makeStyles((theme) => ({
   searchPlace: {
@@ -42,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Search = (params) => {
+  const [searchValue, setSearchValue] = useState("");
   const classes = useStyles();
 
   return (
@@ -49,21 +52,41 @@ const Search = (params) => {
       <Typography variant="h5">
         Enter your postcode to view cafes, canteens and restaurants nearby
       </Typography>
-      <FormControl className={classes.margin}>
+      <FormControl className={classes.margin} variant="outlined">
         <Grid container direction="row">
-          <Input
-            id="input-with-icon-adornment"
-            placeholder="Search..."
+          <TextField
+            label="Search"
+            id="outlined-end-adornment"
+            sx={{ m: 1, width: "25ch" }}
+            value={searchValue}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment
+                  position="end"
+                  onClick={() => {
+                    setSearchValue("BR6 9WE");
+                    params.setSearchString("BR6 9WE");
+                  }}
+                >
+                  <IconButton>
+                    <MyLocationIcon color="primary" />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
             onChange={(e) => {
               params.setSearchString(e.target.value);
             }}
           />
-          <IconButton
-            aria-label="Search"
+          <Button
+            variant="contained"
+            color="primary"
+            size="small"
+            style={{ margin: "1em 1em 0 1em " }}
             onClick={() => params.setToggle(true)}
           >
-            <SearchIcon />
-          </IconButton>
+            Search
+          </Button>
         </Grid>
       </FormControl>
     </Container>
