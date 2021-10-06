@@ -4,7 +4,7 @@ import logo from "../assets/LogoWhiteAndBlue.png";
 
 function Header(params) {
   return (
-    <AppBar position="static">
+    <AppBar position="static" style={{ backgroundColor: "#fff" }}>
       <Toolbar>
         <IconButton onClick={() => params.setToggle(false)}>
           <img
