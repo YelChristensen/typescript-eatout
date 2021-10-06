@@ -34,7 +34,7 @@ function App() {
         <Header setToggle={setToggle} />
 
         {toggle ? (
-          <Fetch searchString={searchString} />
+          <Fetch searchString={searchString} setToggle={setToggle}/>
         ) : (
           <Search setSearchString={setSearchString} setToggle={setToggle} />
         )}

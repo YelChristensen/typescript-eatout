@@ -20,7 +20,7 @@ This was going to be a front-end only app, but I had to set up a proxy server in
 
 ### Installation and set-up
 
-Because this app is made of two npm projects, afte the repo is cloned, there are two places to run `npm` commands:
+Because this app is made of two npm projects, after the repo is cloned, there are two places to run `npm` commands:
 
 1. Node API server at the root
 2. React UI
