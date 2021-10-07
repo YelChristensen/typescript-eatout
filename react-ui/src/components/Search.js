@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import { alpha, makeStyles } from "@material-ui/core/styles";
 import MyLocationIcon from "@material-ui/icons/MyLocation";
+import SearchIcon from "@material-ui/icons/Search";
 
 const useStyles = makeStyles((theme) => ({
   searchPlace: {
@@ -47,14 +48,6 @@ const Search = (params) => {
   const location = useGeolocation();
   const classes = useStyles();
 
-  // useEffect(() => {
-  //   if (location.loaded) {
-  //     console.log(JSON.stringify(location));
-  //   } else {
-  //     console.log("Location data not available yet.");
-  //   }
-  // }, [content]);
-
   return (
     <Container maxWidth="sm" className={classes.searchPlace}>
       <Typography variant="h5">
@@ -73,18 +66,19 @@ const Search = (params) => {
                   params.setSearchString(e.target.value);
                 }}
               />
+
               <Button
                 variant="contained"
                 color="primary"
                 size="small"
-                style={{ margin: "1em 1em 0 1em " }}
+                style={{ margin: "1em 1em 0 0 " }}
                 onClick={(e) => {
                   params.searchString
                     ? params.setToggle(true)
                     : setContent("Please enter a postcode");
                 }}
               >
-                Search
+                <SearchIcon />
               </Button>
             </Grid>
           </FormControl>

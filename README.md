@@ -4,7 +4,7 @@
 
 ## An app for finding safe places to eat nearby
 
-**EatOut** is a mobile first web app for finding cafes, restaurants and canteens nearby and checking their food hygiene rating. Simply enter your postcode in the search field and get a list of venues nearest first.
+**EatOut** is a mobile first web app for finding cafes, restaurants and canteens nearby and checking their food hygiene rating. Simply enter your postcode in the search field and get a list of venues nearest first. Alternative click "Use my location" and let the app do the rest.
 
 ## To see the MVP on Heroku, navigate here: https://safe-garden-52184.herokuapp.com/
 
