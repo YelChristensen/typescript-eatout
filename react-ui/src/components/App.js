@@ -27,6 +27,7 @@ const useStyles = (theme) => ({
 function App() {
   const [searchString, setSearchString] = useState("");
   const [toggle, setToggle] = useState(false);
+  const [latlong, setLatLong] = useState({});
 
   return (
     <CssBaseline>
@@ -34,9 +35,20 @@ function App() {
         <Header setToggle={setToggle} />
 
         {toggle ? (
-          <Fetch searchString={searchString} setToggle={setToggle}/>
+          <Fetch
+            searchString={searchString}
+            latlong={latlong}
+            setSearchString={setSearchString}
+            setToggle={setToggle}
+            setLatLong={setLatLong}
+          />
         ) : (
-          <Search setSearchString={setSearchString} setToggle={setToggle} />
+          <Search
+            searchString={searchString}
+            setSearchString={setSearchString}
+            setToggle={setToggle}
+            setLatLong={setLatLong}
+          />
         )}
       </div>
     </CssBaseline>

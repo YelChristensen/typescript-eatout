@@ -1,11 +1,10 @@
 import React, { useState } from "react";
+import useGeolocation from "./useGeolocation";
 import {
   Button,
   Container,
   FormControl,
   Grid,
-  IconButton,
-  InputAdornment,
   TextField,
   Typography,
 } from "@material-ui/core";
@@ -44,51 +43,77 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Search = (params) => {
-  const [searchValue, setSearchValue] = useState("");
+  const [content, setContent] = useState("");
+  const location = useGeolocation();
   const classes = useStyles();
+
+  // useEffect(() => {
+  //   if (location.loaded) {
+  //     console.log(JSON.stringify(location));
+  //   } else {
+  //     console.log("Location data not available yet.");
+  //   }
+  // }, [content]);
 
   return (
     <Container maxWidth="sm" className={classes.searchPlace}>
       <Typography variant="h5">
         Enter your postcode to view cafes, canteens and restaurants nearby
       </Typography>
-      <FormControl className={classes.margin} variant="outlined">
-        <Grid container direction="row">
-          <TextField
-            label="Search"
-            id="outlined-end-adornment"
-            sx={{ m: 1, width: "25ch" }}
-            value={searchValue}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment
-                  position="end"
-                  onClick={() => {
-                    setSearchValue("BR6 9WE");
-                    params.setSearchString("BR6 9WE");
-                  }}
-                >
-                  <IconButton>
-                    <MyLocationIcon color="primary" />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-            onChange={(e) => {
-              params.setSearchString(e.target.value);
-            }}
-          />
+      <Grid container direction="column">
+        <Grid item>
+          <FormControl className={classes.margin} variant="outlined">
+            <Grid container direction="row">
+              <TextField
+                label="Search"
+                id="outlined-end-adornment"
+                sx={{ m: 1, width: "25ch" }}
+                onChange={(e) => {
+                  setContent("");
+                  params.setSearchString(e.target.value);
+                }}
+              />
+              <Button
+                variant="contained"
+                color="primary"
+                size="small"
+                style={{ margin: "1em 1em 0 1em " }}
+                onClick={(e) => {
+                  params.searchString
+                    ? params.setToggle(true)
+                    : setContent("Please enter a postcode");
+                }}
+              >
+                Search
+              </Button>
+            </Grid>
+          </FormControl>
+        </Grid>
+        <Grid item>{content}</Grid>
+        <Grid item>
           <Button
             variant="contained"
             color="primary"
             size="small"
             style={{ margin: "1em 1em 0 1em " }}
-            onClick={() => params.setToggle(true)}
+            onClick={() => {
+              if (location.error) {
+                setContent(
+                  `Error: ${location.error.message}. You may need to allow this site to access your location or use the search by postcode option.`
+                );
+              } else if (location.loaded) {
+                params.setToggle(true);
+                params.setLatLong(location.coordinates);
+              } else {
+                setContent("Loading your location, try in a few seconds");
+              }
+            }}
           >
-            Search
+            Use my location
+            <MyLocationIcon style={{ marginLeft: "5px" }} />
           </Button>
         </Grid>
-      </FormControl>
+      </Grid>
     </Container>
   );
 };

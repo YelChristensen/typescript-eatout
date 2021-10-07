@@ -46,35 +46,30 @@ function Fetch(params) {
   useEffect(() => {
     setIsLoading(true);
     const postcodeURL = "https://api.postcodes.io/postcodes";
-    Axios.get(`${postcodeURL}/${params.searchString}/validate`)
-      .then((response) => {
-        if (response.data.result === true) {
-          Axios.get(`${postcodeURL}/${params.searchString}`).then(
-            (response) => {
-              const lat = response.data.result.latitude;
-              const long = response.data.result.longitude;
-              return venueFetch(lat, long);
-              //   return Axios.get(
-              //     `https://safe-garden-52184.herokuapp.com/${long}/${lat}/1/30/json`
-              //   );
-              // })
-              // .then((response) => {
-              //   let venues =
-              //     response.data.FHRSEstablishment.EstablishmentCollection
-              //       .EstablishmentDetail;
-              //   setIsLoading(false);
-              //   return setVenueList(venues);
-            }
-          );
-        } else {
-          setInvalidPostcode(true);
-          setIsLoading(false);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [params.searchString]);
+    if (params.searchString) {
+      Axios.get(`${postcodeURL}/${params.searchString}/validate`)
+        .then((response) => {
+          if (response.data.result === true) {
+            Axios.get(`${postcodeURL}/${params.searchString}`).then(
+              (response) => {
+                const lat = response.data.result.latitude;
+                const long = response.data.result.longitude;
+                return venueFetch(lat, long);
+              }
+            );
+          } else {
+            setInvalidPostcode(true);
+            setIsLoading(false);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      console.log(params.latlong.lat, params.latlong.lng);
+      venueFetch(params.latlong.lat, params.latlong.lng);
+    }
+  }, [params.searchString, params.latlong]);
 
   return isLoading ? (
     <Container maxWidth="sm" className={classes.searchLoading}>
@@ -86,7 +81,11 @@ function Fetch(params) {
         <Button
           variant="contained"
           color="primary"
-          onClick={() => params.setToggle(false)}
+          onClick={() => {
+            params.setToggle(false);
+            params.setSearchString("");
+            params.setLatLong({});
+          }}
         >
           Search again
         </Button>
