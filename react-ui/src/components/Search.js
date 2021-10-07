@@ -56,11 +56,14 @@ const Search = (params) => {
       <Grid container direction="column">
         <Grid item>
           <FormControl className={classes.margin} variant="outlined">
-            <Grid container direction="row">
+            <Grid
+              container
+              direction="row"
+              justifyContent="center"
+              alignItems="center"
+            >
               <TextField
                 label="Search"
-                id="outlined-end-adornment"
-                sx={{ m: 1, width: "25ch" }}
                 onChange={(e) => {
                   setContent("");
                   params.setSearchString(e.target.value);
