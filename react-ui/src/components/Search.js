@@ -45,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Search = (params) => {
   const [content, setContent] = useState("");
+
   const location = useGeolocation();
   const classes = useStyles();
 
@@ -93,20 +94,19 @@ const Search = (params) => {
             color="primary"
             size="small"
             style={{ margin: "1em 1em 0 1em " }}
+            disabled={location.loaded === false}
             onClick={() => {
               if (location.error) {
                 setContent(
                   `Error: ${location.error.message}. You may need to allow this site to access your location or use the search by postcode option.`
                 );
-              } else if (location.loaded) {
+              } else {
                 params.setToggle(true);
                 params.setLatLong(location.coordinates);
-              } else {
-                setContent("Loading your location, try in a few seconds");
               }
             }}
           >
-            Use my location
+            {location.loaded ? `Use my location` : "Getting your location"}
             <MyLocationIcon style={{ marginLeft: "5px" }} />
           </Button>
         </Grid>

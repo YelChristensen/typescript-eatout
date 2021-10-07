@@ -30,7 +30,7 @@ export default function VenueCard(venue) {
           {venue.venue.BusinessName}
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
-          Distance: {venue.venue.Distance}
+          Distance: {parseFloat(venue.venue.Distance).toFixed(2)} miles away
         </Typography>
         <Typography variant="body2" component="p">
           {venue.venue.AddressLine1}

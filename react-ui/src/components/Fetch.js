@@ -93,7 +93,7 @@ function Fetch(params) {
       <Grid container direction="column">
         {invalidPostcode ? (
           <Typography align="center" variant="h6">
-            Wrong postcode, try again
+            This is not a valid postcode, try again
           </Typography>
         ) : (
           venueList.map((venue) => (
