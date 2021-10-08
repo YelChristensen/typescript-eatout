@@ -25,6 +25,7 @@ function Fetch(params) {
   const classes = useStyles();
   const [venueList, setVenueList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [userLocation, setUserLocation] = useState({ lat: "", long: "" });
   const [invalidPostcode, setInvalidPostcode] = useState(false);
 
   const venueFetch = (lat, long) => {
@@ -53,8 +54,9 @@ function Fetch(params) {
             Axios.get(`${postcodeURL}/${params.searchString}`).then(
               (response) => {
                 const lat = response.data.result.latitude;
-                const long = response.data.result.longitude;
-                return venueFetch(lat, long);
+                const lng = response.data.result.longitude;
+                setUserLocation({ lat: lat, lng: lng });
+                return venueFetch(lat, lng);
               }
             );
           } else {
@@ -66,7 +68,7 @@ function Fetch(params) {
           console.log(error);
         });
     } else {
-      console.log(params.latlong.lat, params.latlong.lng);
+      setUserLocation({ lat: params.latlong.lat, lng: params.latlong.lng });
       venueFetch(params.latlong.lat, params.latlong.lng);
     }
   }, [params.searchString, params.latlong]);
@@ -97,7 +99,11 @@ function Fetch(params) {
           </Typography>
         ) : (
           venueList.map((venue) => (
-            <VenueCard key={venue.BusinessName} venue={venue} />
+            <VenueCard
+              key={venue.BusinessName}
+              venue={venue}
+              userLocation={userLocation}
+            />
           ))
         )}
       </Grid>

@@ -4,7 +4,7 @@
 
 ## An app for finding safe places to eat nearby
 
-**EatOut** is a mobile first web app for finding cafes, restaurants and canteens nearby and checking their food hygiene rating. Simply enter your postcode in the search field and get a list of venues nearest first. Alternative click "Use my location" and let the app do the rest
+**EatOut** is a mobile first web app for finding cafes, restaurants and canteens nearby and checking their food hygiene rating. Simply enter your postcode in the search field and get a list of venues nearest first. Alternative click "Use my location" and let the app do the rest. From the venue list you can click "Directions" to use google maps to navigate to your chosen venue.
 
 ## To see the MVP on Heroku, navigate here: https://safe-garden-52184.herokuapp.com/
 
@@ -52,11 +52,10 @@ npm start
 
 ### How it works
 
-The user is presented with a search field, where they can enter their postcode. The app converts the postcode into the lat-long coordinates (first API call), then fetches the list of 30 nearest restaurants, cafes and canteens and their food hygiene ratings sorted by distance (second API call).
+The user is presented with a search field, where they can enter their postcode. The app first checks if the postcode is valid (first API call). The valid postcode is converted into lat-long coordinates (second API call), then fetches the list of 30 nearest restaurants, cafes and canteens and their food hygiene ratings sorted by distance (third API call).
+Alternatively, the user can use geolocation option whereby the generated lat-long value pair is used to fetch the venue list and create google maps directions.
 
 ### Todos:
 
 - add bars, pubs and takaways to the venue list
-- add Google Maps API to plot venus on the map
-- add autocomplete address on the search field (also using Google Maps API)
 - write tests
