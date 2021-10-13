@@ -1,5 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
-import avocado from "../assets/avocado.svg";
+import React, { useEffect, useState } from "react";
 import fhrs_0 from "../assets/fhrs_0.jpg";
 import fhrs_1 from "../assets/fhrs_1.jpg";
 import fhrs_2 from "../assets/fhrs_2.jpg";

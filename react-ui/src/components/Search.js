@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
+import Axios from "axios";
 import useGeolocation from "./useGeolocation";
 import {
   Button,
@@ -8,7 +9,7 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
-import { alpha, makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import MyLocationIcon from "@material-ui/icons/MyLocation";
 import SearchIcon from "@material-ui/icons/Search";
 
@@ -17,36 +18,43 @@ const useStyles = makeStyles((theme) => ({
     padding: 60,
     textAlign: "center",
   },
-  search: {
-    margin: 40,
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.75),
-    "&:hover": {
-      backgroundColor: "white",
-    },
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(1),
-      width: "auto",
-    },
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
 }));
 
 const Search = (params) => {
   const [content, setContent] = useState("");
-
   const location = useGeolocation();
+  const handleSearch = useCallback(() => {
+    params.searchString
+      ? validatePostcode()
+      : setContent("Please enter a postcode");
+  }, [params.searchString]);
+
+  const handleUseMyLocation = useCallback(() => {
+    if (location.error) {
+      setContent(
+        `Error: ${location.error.message}. You may need to allow this site to access your location or use the search by postcode option.`
+      );
+    } else {
+      params.setToggle(true);
+      params.setLatLong(location.coordinates);
+    }
+  });
+
+  const validatePostcode = useCallback(() => {
+    const postcodeURL = "https://api.postcodes.io/postcodes";
+    Axios.get(`${postcodeURL}/${params.searchString}/validate`)
+      .then((response) => {
+        if (response.data.result === true) {
+          params.setToggle(true);
+        } else {
+          setContent("This is not a valid postcode. Try again.");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  });
+
   const classes = useStyles();
 
   return (
@@ -76,11 +84,7 @@ const Search = (params) => {
                 color="primary"
                 size="small"
                 style={{ margin: "1em 1em 0 0 " }}
-                onClick={(e) => {
-                  params.searchString
-                    ? params.setToggle(true)
-                    : setContent("Please enter a postcode");
-                }}
+                onClick={handleSearch}
               >
                 <SearchIcon />
               </Button>
@@ -95,16 +99,7 @@ const Search = (params) => {
             size="small"
             style={{ margin: "1em 1em 0 1em " }}
             disabled={location.loaded === false}
-            onClick={() => {
-              if (location.error) {
-                setContent(
-                  `Error: ${location.error.message}. You may need to allow this site to access your location or use the search by postcode option.`
-                );
-              } else {
-                params.setToggle(true);
-                params.setLatLong(location.coordinates);
-              }
-            }}
+            onClick={handleUseMyLocation}
           >
             {location.loaded ? `Use my location` : "Getting your location"}
             <MyLocationIcon style={{ marginLeft: "5px" }} />

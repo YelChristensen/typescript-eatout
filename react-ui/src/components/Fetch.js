@@ -2,13 +2,7 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 
 import VenueCard from "./VenueCard";
-import {
-  Button,
-  Container,
-  Grid,
-  makeStyles,
-  Typography,
-} from "@material-ui/core";
+import { Button, Container, Grid, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   searchResults: {
@@ -26,7 +20,6 @@ function Fetch(params) {
   const [venueList, setVenueList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [userLocation, setUserLocation] = useState({ lat: "", long: "" });
-  const [invalidPostcode, setInvalidPostcode] = useState(false);
 
   const venueFetch = (lat, long) => {
     Axios.get(
@@ -48,25 +41,12 @@ function Fetch(params) {
     setIsLoading(true);
     const postcodeURL = "https://api.postcodes.io/postcodes";
     if (params.searchString) {
-      Axios.get(`${postcodeURL}/${params.searchString}/validate`)
-        .then((response) => {
-          if (response.data.result === true) {
-            Axios.get(`${postcodeURL}/${params.searchString}`).then(
-              (response) => {
-                const lat = response.data.result.latitude;
-                const lng = response.data.result.longitude;
-                setUserLocation({ lat: lat, lng: lng });
-                return venueFetch(lat, lng);
-              }
-            );
-          } else {
-            setInvalidPostcode(true);
-            setIsLoading(false);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      Axios.get(`${postcodeURL}/${params.searchString}`).then((response) => {
+        const lat = response.data.result.latitude;
+        const lng = response.data.result.longitude;
+        setUserLocation({ lat: lat, lng: lng });
+        return venueFetch(lat, lng);
+      });
     } else {
       setUserLocation({ lat: params.latlong.lat, lng: params.latlong.lng });
       venueFetch(params.latlong.lat, params.latlong.lng);
@@ -93,19 +73,13 @@ function Fetch(params) {
         </Button>
       </Grid>
       <Grid container direction="column">
-        {invalidPostcode ? (
-          <Typography align="center" variant="h6">
-            This is not a valid postcode, try again
-          </Typography>
-        ) : (
-          venueList.map((venue) => (
-            <VenueCard
-              key={venue.BusinessName}
-              venue={venue}
-              userLocation={userLocation}
-            />
-          ))
-        )}
+        {venueList.map((venue) => (
+          <VenueCard
+            key={venue.BusinessName}
+            venue={venue}
+            userLocation={userLocation}
+          />
+        ))}
       </Grid>
     </Container>
   );
