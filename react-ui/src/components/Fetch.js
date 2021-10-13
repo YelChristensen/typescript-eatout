@@ -44,7 +44,12 @@ function Fetch(params) {
       Axios.get(`${postcodeURL}/${params.searchString}`).then((response) => {
         const lat = response.data.result.latitude;
         const lng = response.data.result.longitude;
-        setUserLocation({ lat: lat, lng: lng });
+        params.latlong
+          ? setUserLocation({
+              lat: params.latlong.lat,
+              lng: params.latlong.lng,
+            })
+          : setUserLocation({ lat: lat, lng: lng });
         return venueFetch(lat, lng);
       });
     } else {

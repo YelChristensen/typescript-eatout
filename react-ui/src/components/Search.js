@@ -45,6 +45,7 @@ const Search = (params) => {
     Axios.get(`${postcodeURL}/${params.searchString}/validate`)
       .then((response) => {
         if (response.data.result === true) {
+          params.setLatLong(location.coordinates);
           params.setToggle(true);
         } else {
           setContent("This is not a valid postcode. Try again.");
