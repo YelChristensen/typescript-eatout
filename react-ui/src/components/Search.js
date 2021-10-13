@@ -23,11 +23,15 @@ const useStyles = makeStyles((theme) => ({
 const Search = (params) => {
   const [content, setContent] = useState("");
   const location = useGeolocation();
-  const handleSearch = useCallback(() => {
-    params.searchString
-      ? validatePostcode()
-      : setContent("Please enter a postcode");
-  }, [params.searchString]);
+  const handleSearch = useCallback(
+    (e) => {
+      e.preventDefault();
+      params.searchString
+        ? validatePostcode()
+        : setContent("Please enter a postcode");
+    },
+    [params.searchString]
+  );
 
   const handleUseMyLocation = useCallback(() => {
     if (location.error) {
@@ -36,6 +40,7 @@ const Search = (params) => {
       );
     } else {
       params.setToggle(true);
+      params.setSearchString("");
       params.setLatLong(location.coordinates);
     }
   });
@@ -48,6 +53,7 @@ const Search = (params) => {
           params.setLatLong(location.coordinates);
           params.setToggle(true);
         } else {
+          params.setSearchString("");
           setContent("This is not a valid postcode. Try again.");
         }
       })
