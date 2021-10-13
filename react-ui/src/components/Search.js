@@ -92,7 +92,9 @@ const Search = (params) => {
             </Grid>
           </FormControl>
         </Grid>
-        <Grid item>{content}</Grid>
+        <Grid item>
+          <Typography style={{ color: "red" }}>{content}</Typography>
+        </Grid>
         <Grid item>
           <Button
             variant="contained"
